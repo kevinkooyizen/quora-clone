@@ -5,7 +5,5 @@ class User < ActiveRecord::Base
 	validates :email, uniqueness: true
 	validates :password, length: { minimum: 2 }
 	has_secure_password
-
-
 end
 	# validates :phone, :format => { :with => /(.*(\d).*){10,}/ }

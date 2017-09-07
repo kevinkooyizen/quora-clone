@@ -1,9 +1,39 @@
-<h1>Hello World</h1>
-<p>See Me in views/static/index.html.erb</p>
-<form action="/signup_page"> -->
-    <input type="submit" value="Sign Up!" />
-</form>
-
-<form action="/login_page"> -->
-    <input type="submit" value="Login!" />
-</form>
+<h1 id="top_title">Welcome to the Home page</h1>
+<div class="col-sm-5">
+  <div class="well" id="top_question"> 
+	   <form class="form-horizontal" method="post" action="/post_question" id="question_form">
+		<h4>Questions?</h4>
+	 	<div class="form-group" style="padding:14px;">
+		  <textarea name = "question_input" class="form-control" placeholder="Place your question here"></textarea>
+		</div>
+		<button class="btn btn-primary pull-right" type="submit" id="post_button">Post</button>
+	  </form>
+  </div>
+  <div id="dummy"></div>
+  <% @question.order("id ASC").each_with_index do |u|%>
+	  <div class="panel panel-default">
+		 <div class="panel-heading"><h4><%= u.question %></h4></div>
+		  <div class="panel-body">
+			<div class="clearfix"></div>
+			<hr>
+			<% @answer.each do |i|%>
+				<% byebug %>
+				<% if i.id == u.id %>
+					<%= i.answer %>
+				<% end %>
+			<% end %>			
+			<hr>
+			<form action="/post_answer" method = "post">
+			<div class="input-group">
+			  <div class="input-group-btn">
+			  <button class="btn btn-default">Up</button><button class="btn btn-default" id="second_button">Down</button>
+			  </div>
+			  <input class="form-control" name = "answer_input" placeholder="Add a comment.." type="text">
+			  <input type="hidden" name = "question_id" value = "<%=u.id%>">
+			</div>
+			</form>
+			
+		  </div>
+	   </div>
+  <%end%>
+</div>

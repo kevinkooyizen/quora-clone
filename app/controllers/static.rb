@@ -1,7 +1,8 @@
 require 'byebug'
-enable :sessions
 
 get '/' do
+	@question = Question.all
+	@answer = Answer.all
   erb :"static/index"
 end
 
@@ -9,7 +10,7 @@ get '/signup_page' do
 	erb :"users/signup_page"
 end
 
-post '/signup_page' do
+post '/signup' do
 	user = User.new(params[:user])
 	# byebug
 	if user.save
@@ -29,8 +30,6 @@ get '/login_page' do
 end
 
 get '/login' do
-	params[:user][:email]
-	params[:user][:password]
 	user = User.find_by(email: params[:user][:email])
 	if user.nil?
 		@errorshown = "Wrong email"
@@ -52,7 +51,25 @@ get '/logout' do
 end
 
 get '/user_profile/:id' do
-	id = params[:id]
-	@user = User.find(id)
-	erb :"users/profile"
+	if logged_in?
+		id = params[:id]
+		@user = User.find(id)
+		erb :"users/profile"
+	else
+		redirect "/"
+	end
+end
+
+post '/post_question' do
+	question = Question.new(question: params[:question_input], user_id: session[:id])
+	if question.save
+		return {success: true, input: params[:question_input], user_id: session[:id]}.to_json
+	end
+end
+
+post '/post_answer' do
+	answer = Answer.new(answer: params[:answer_input], question_id: params[:question_id])
+	if answer.save
+		return {success: true, input: params[:answer_input], user_id: session[:id]}.to_json
+	end
 end

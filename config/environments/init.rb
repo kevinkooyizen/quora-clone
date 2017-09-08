@@ -14,7 +14,6 @@ require 'active_record'
 require 'logger'
 
 	# byebug
-require 'byebug'
 
 	# sinatra
 require 'sinatra'

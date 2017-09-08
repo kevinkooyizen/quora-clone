@@ -9,7 +9,6 @@ gem 'sinatra-contrib'
 
 # Adding thin gem as advised
 gem 'thin'
-gem 'byebug'
 
 # Adding secure pass word gem
 gem 'bcrypt', '~> 3.1.7'

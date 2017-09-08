@@ -21,6 +21,7 @@ $(document).ready(function(){
 				  <div class="panel panel-default">\
 					 <div class="panel-heading"><h4>' + response.input + '</h4></div>\
 					  <div class="panel-body">\
+					  <hr>\
 						<form>\
 						<div class="input-group">\
 						  <div class="input-group-btn">\
@@ -32,6 +33,33 @@ $(document).ready(function(){
 						\
 					  </div>\
 				   </div>\
+				');
+			},
+			error: function(response){
+			}
+		});
+	});
+
+	var answer = $('#answer_front_page');
+	answer.on('submit', function(answerSubmissionEvent){
+		answerSubmissionEvent.preventDefault();
+		console.log("Prevented default action!");
+
+		$('body').prepend('<img src="/img/spinner.gif" id="spinner" />');
+
+		$.ajax({
+			url: answer.attr('action'), // same as putting "urls"
+			method: answer.attr('method'),
+			data: answer.serialize(),
+			dataType: 'JSON',
+			success: function(response) {
+				$('#spinner').hide();
+				console.log(response);
+
+				$('#answer_front_page').before('\
+				  	<div id = "answer">Answer: ' + response.input + '</div>\
+				  	<div id = "answer-user">User: ' + response.user_name + '</div>\
+					<hr>\
 				');
 			},
 			error: function(response){

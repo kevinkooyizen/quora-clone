@@ -10,20 +10,26 @@
 	  </form>
   </div>
   <div id="dummy"></div>
-  <% @question.order("id ASC").each_with_index do |u|%>
+  <% @question.order("id ASC").each do |u|%>
 	  <div class="panel panel-default">
-		 <div class="panel-heading"><h4><%= u.question %></h4></div>
+		 <div class="panel-heading">
+		 	<a href = "questions/<%= u.id %>">
+		 	<h4>Question: <%= u.question %></h4>
+		 	</a>
+		 </div>
 		  <div class="panel-body">
 			<div class="clearfix"></div>
 			<hr>
+			<div id = "answer_box">
 			<% @answer.each do |i|%>
-				<% byebug %>
-				<% if i.id == u.id %>
-					<%= i.answer %>
+				<% if i.question_id == u.id %>
+					<div id = "answer">Answer: <%= i.answer %></div>
+					<div id = "answer-user">User: <%= User.find_by(id: i.user_id).fullname %></div>
+					<hr>
 				<% end %>
 			<% end %>			
-			<hr>
-			<form action="/post_answer" method = "post">
+			</div>
+			<form action="/post_answer" method = "post" id = "answer_front_page">
 			<div class="input-group">
 			  <div class="input-group-btn">
 			  <button class="btn btn-default">Up</button><button class="btn btn-default" id="second_button">Down</button>
@@ -32,7 +38,6 @@
 			  <input type="hidden" name = "question_id" value = "<%=u.id%>">
 			</div>
 			</form>
-			
 		  </div>
 	   </div>
   <%end%>

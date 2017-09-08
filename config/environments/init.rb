@@ -13,6 +13,9 @@ require 'pg'
 require 'active_record'
 require 'logger'
 
+	# byebug
+require 'byebug'
+
 	# sinatra
 require 'sinatra'
 require "sinatra/reloader" if development?

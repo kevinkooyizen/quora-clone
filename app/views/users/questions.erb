@@ -1,0 +1,38 @@
+<div class="col-sm-5"> 
+  <% @question.order("id ASC").each do |u|%>
+  	<% if u.user_id == @user.id %>
+	  <div class="panel panel-default">
+		 <div class="panel-heading">
+		 	<h4>Question: <a href = "/questions/<%= u.id %>"><%= u.question %></a></h4>
+		 </div>
+		  <div class="panel-body">
+			<div class="clearfix"></div>
+			<hr>
+			<div id = "answer_box">
+			<% @answer.each do |i|%>
+				<% if i.question_id == u.id %>
+					<div id = "answer">Answer: <%= i.answer %></div>
+					<div id = "answer-user">
+						User: 
+						<a href = "/users/<%= i.user_id %>">
+						<%= User.find_by(id: i.user_id).fullname %>
+						</a>
+					</div>
+					<hr>
+				<% end %>
+			<% end %>			
+			</div>
+			<form action="/post_answer" method = "post" id = "answer_front_page">
+			<div class="input-group">
+			  <div class="input-group-btn">
+			  <button class="btn btn-default">Up</button><button class="btn btn-default" id="second_button">Down</button>
+			  </div>
+			  <input class="form-control" name = "answer_input" placeholder="Add a comment.." type="text">
+			  <input type="hidden" name = "question_id" value = "<%=u.id%>">
+			</div>
+			</form>
+		  </div>
+	   </div>
+   	<% end %>
+  <%end%>
+</div>

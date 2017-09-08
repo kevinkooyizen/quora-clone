@@ -2,12 +2,10 @@
 
 <p><%= @user.fullname %>'s email is: <%= @user.email %></p>
 <p><%= @user.fullname %>'s id is: <%= @user.id %></p>
-<a href = "/users/<%= @user.id %>/questions">Questions</a>
-<a href = "/users/<%= @user.id %>/answers">Answers</a>
 <div class="col-sm-5"> 
   <div class="panel panel-default">
 	 <div class="panel-heading">
-	 	Submitted Questions:
+		<a href = "/users/<%= @user.id %>/questions">Submitted Questions:</a>
 	 </div>
    </div>
 </div>
@@ -15,7 +13,7 @@
 <div class="col-sm-5"> 
   <div class="panel panel-default">
 	 <div class="panel-heading">
-	 	Submitted Answers:
+	 	<a href = "/users/<%= @user.id %>/questions">Submitted Answers:</a>
 	 </div>
    </div>
 </div>

@@ -1,13 +1,15 @@
 <div class="col-sm-5">
   <% @question.order("id ASC").each do |u|%>
 	  <div class="panel panel-default">
-		 <div class="panel-heading">
-			  <div class="input-group-btn" id ="voting_box">
-			  		<button formaction="/up_vote" class="btn btn-default" id="first_button"><img src = "/img/upvote.png" width = 100%/></button>
-				<h6 id = "vote_count">0000</h6>
-					<button formaction="/down_vote" class="btn btn-default" id="second_button"><img src = "/img/downvote.png" width = 100%/></button>
+		 <div class="panel-heading question_heading">
+			  <div class="input-group-btn voting_box">
+			  		<button formaction="/up_vote" class="vote_buttons btn btn-default first_button"><img src = "/img/upvote.png" class = "vote_buttons"/></button>
+				<h6 id = "vote_count">000</h6>
+					<button formaction="/down_vote" class="vote_buttons btn btn-default second_button"><img src = "/img/downvote.png" class = "vote_buttons"/></button>
 			  </div>
-		 	<h4>Question: <a href = "/questions/<%= u.id %>"><%= u.question %></a></h4>
+			  <div id = "question_box">
+		 		<h4 id = "question_in_heading_panel">Question: <a href = "/questions/<%= u.id %>"><%= u.question %></a></h4>
+		 	  </div>
 		 </div>
 		  <div class="panel-body">
 			<div class="clearfix"></div>
@@ -15,8 +17,13 @@
 			<div id = "answer_box">
 			<% @answer.each do |i|%>
 				<% if i.question_id == u.id %>
-					<div id = "answer">Answer: <%= i.answer %></div>
-					<div id = "answer-user">
+					<div class="input-group-btn voting_box">
+				  		<button formaction="/up_vote" class="vote_buttons btn btn-default first_button"><img src = "/img/upvote.png" class = "vote_buttons"/></button>
+					<h6 id = "vote_count">000</h6>
+						<button formaction="/down_vote" class="vote_buttons btn btn-default second_button"><img src = "/img/downvote.png" class = "vote_buttons"/></button>
+				  	</div>
+					<div class = "question_contents_main_panel" id = "answer">Answer: <%= i.answer %></div>
+					<div class = "question_contents_main_panel" id = "answer-user">
 						User: 
 						<a href = "/users/<%= i.user_id %>">
 						<%= User.find_by(id: i.user_id).fullname %>
@@ -26,7 +33,7 @@
 				<% end %>
 			<% end %>			
 			</div>
-			<div class="input-group">
+			<div class="input-group answer_box">
 			<form action="/post_answer" method = "post" id = "answer_front_page">
 			  <input class="form-control" name = "answer_input" placeholder="Add a comment.." type="text" id = "answer_in_question">
 			  <input type="hidden" name = "question_id" value = "<%=u.id%>">

@@ -46,38 +46,39 @@ $(document).ready(function(){
 	});
 
 	var answer = $('#answer_front_page');
-	answer.on('submit', function(answerSubmissionEvent){
-		answerSubmissionEvent.preventDefault();
-		console.log("Prevented default action!");
+	// answer.on('submit', function(answerSubmissionEvent){
+	// 	answerSubmissionEvent.preventDefault();
+	// 	console.log("Prevented default action!");
 
-		$('body').prepend('<img src="/img/spinner.gif" id="spinner" />');
+	// 	$('body').prepend('<img src="/img/spinner.gif" id="spinner" />');
 
-		$.ajax({
-			url: answer.attr('action'), // same as putting "urls"
-			method: answer.attr('method'),
-			data: answer.serialize(),
-			dataType: 'JSON',
-			success: function(response) {
-				$('#spinner').hide();
-				console.log(response);
+	// 	$.ajax({
+	// 		url: answer.attr('action'), // same as putting "urls"
+	// 		method: answer.attr('method'),
+	// 		data: answer.serialize(),
+	// 		dataType: 'JSON',
+	// 		success: function(response) {
+	// 			$('#spinner').hide();
+	// 			console.log(response);
 
-				if (response.success) {
-					$('#answer_front_page').before('\
-					  	<div id = "answer">Answer: ' + response.input + '</div>\
-					  	<div id = "answer-user">User: ' + response.user_name + '</div>\
-						<hr>\
-					');
-				}
-				else {
-					window.location.href = response.data_url
-				}
+	// 			if (response.success) {
+	// 				debugger;
+	// 				$('#answer_front_page').before('\
+	// 				  	<div id = "answer">Answer: ' + response.input + '</div>\
+	// 				  	<div id = "answer-user">User: ' + response.user_name + '</div>\
+	// 					<hr>\
+	// 				');
+	// 			}
+	// 			else {
+	// 				window.location.href = response.data_url
+	// 			}
 
-			},
-			error: function(response){
-				$('#spinner').hide();
-			}
-		});
-	});
+	// 		},
+	// 		error: function(response){
+	// 			$('#spinner').hide();
+	// 		}
+	// 	});
+	// });
 
 	// form.on("paste", function(formSubmissionEvent){
 	// 	var pastedData = formSubmissionEvent.originalEvent.clipboardData.getData('text');

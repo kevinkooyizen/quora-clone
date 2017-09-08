@@ -88,10 +88,33 @@ body{
     padding-bottom: 50px;
 }
 
+#first_button {
+    border-color: white;
+    width: 25px;
+    height: 25px;
+    padding: 2px;
+}
+
 #second_button {
+    border-color: white;
+    width: 25px;
+    height: 25px;
+    padding: 2px;
     margin-left: 0px;
     margin-right: -2px;
-    height: 34px;
+}
+
+#vote_count {
+    text-align: center;
+    margin: 0px;
+}
+
+#voting_box {
+    padding-right: 2px;
+}
+
+#answer_in_question {
+    height: 63px;
 }
 
 /*signup_page*/

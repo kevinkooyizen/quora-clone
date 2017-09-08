@@ -19,15 +19,17 @@
 			<% end %>
 		<% end %>			
 		</div>
-		<form action="/post_answer" method = "post" id = "answer_front_page">
 		<div class="input-group">
-		  <div class="input-group-btn">
-		  <button class="btn btn-default">Up</button><button class="btn btn-default" id="second_button">Down</button>
+		  <div class="input-group-btn" id ="voting_box">
+		  		<button formaction="/up_vote" class="btn btn-default" id="first_button"><img src = "/img/upvote.png" width = 100%/></button>
+			<h6 id = "vote_count">0000</h6>
+				<button formaction="/down_vote" class="btn btn-default" id="second_button"><img src = "/img/downvote.png" width = 100%/></button>
 		  </div>
-		  <input class="form-control" name = "answer_input" placeholder="Add a comment.." type="text">
+		<form action="/post_answer" method = "post" id = "answer_front_page">
+		  <input class="form-control" name = "answer_input" placeholder="Add a comment.." type="text" id = "answer_in_question">
 		  <input type="hidden" name = "question_id" value = "<%=@question.id%>">
-		</div>
 		</form>
+		</div>
 	  </div>
    </div>
 </div>

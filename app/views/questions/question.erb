@@ -1,6 +1,7 @@
+<div class="col-sm-5"> 
   <div class="panel panel-default">
 	 <div class="panel-heading">
-	 	<h4>Question: <%= @question %></h4>
+	 	<h4>Question: <a href = "/questions/<%= @question.id %>"><%= @question.question %></a></h4>
 	 </div>
 	  <div class="panel-body">
 		<div class="clearfix"></div>
@@ -9,7 +10,11 @@
 		<% @answer.each do |i|%>
 			<% if i.question_id == @question.id %>
 				<div id = "answer">Answer: <%= i.answer %></div>
-				<div id = "answer-user">User: <%= User.find_by(id: i.user_id).fullname %></div>
+				<div id = "answer-user">User: 
+					<a href = "/users/<%= i.user_id %>">
+					<%= User.find_by(id: i.user_id).fullname %>
+					</a>
+				</div>
 				<hr>
 			<% end %>
 		<% end %>			
@@ -25,3 +30,4 @@
 		</form>
 	  </div>
    </div>
+</div>

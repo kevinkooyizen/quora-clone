@@ -17,23 +17,28 @@ $(document).ready(function(){
 				$('#spinner').hide();
 				console.log(response);
 
-				$('.well').after('\
-				  <div class="panel panel-default">\
-					 <div class="panel-heading"><h4>' + response.input + '</h4></div>\
-					  <div class="panel-body">\
-					  <hr>\
-						<form>\
-						<div class="input-group">\
-						  <div class="input-group-btn">\
-						  <button class="btn btn-default">Up</button><button class="btn btn-default" id="second_button">Down</button>\
+				if (response.success) {
+					$('.well').after('\
+					  <div class="panel panel-default">\
+						 <div class="panel-heading"><h4>' + response.input + '</h4></div>\
+						  <div class="panel-body">\
+						  <hr>\
+							<form>\
+							<div class="input-group">\
+							  <div class="input-group-btn">\
+							  <button class="btn btn-default">Up</button><button class="btn btn-default" id="second_button">Down</button>\
+							  </div>\
+							  <input class="form-control" placeholder="Add a comment.." type="text">\
+							</div>\
+							</form>\
+							\
 						  </div>\
-						  <input class="form-control" placeholder="Add a comment.." type="text">\
-						</div>\
-						</form>\
-						\
-					  </div>\
-				   </div>\
-				');
+					   </div>\
+					');
+				}
+				else {
+					window.location.href = response.data_url
+				}
 			},
 			error: function(response){
 			}
@@ -56,13 +61,20 @@ $(document).ready(function(){
 				$('#spinner').hide();
 				console.log(response);
 
-				$('#answer_front_page').before('\
-				  	<div id = "answer">Answer: ' + response.input + '</div>\
-				  	<div id = "answer-user">User: ' + response.user_name + '</div>\
-					<hr>\
-				');
+				if (response.success) {
+					$('#answer_front_page').before('\
+					  	<div id = "answer">Answer: ' + response.input + '</div>\
+					  	<div id = "answer-user">User: ' + response.user_name + '</div>\
+						<hr>\
+					');
+				}
+				else {
+					window.location.href = response.data_url
+				}
+
 			},
 			error: function(response){
+				$('#spinner').hide();
 			}
 		});
 	});

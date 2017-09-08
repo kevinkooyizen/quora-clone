@@ -1,3 +1,22 @@
-<h1>Hello <%= @user.fullname %>!</h1>
+<h1>Hello this is the profile page of <%= @user.fullname %>!</h1>
 
-<p>Your email is <%= @user.email %></p>
+<p><%= @user.fullname %>'s email is: <%= @user.email %></p>
+<p><%= @user.fullname %>'s id is: <%= @user.id %></p>
+<a href = "/users/<%= @user.id %>/questions">Questions</a>
+<a href = "/users/<%= @user.id %>/answers">Answers</a>
+<div class="col-sm-5"> 
+  <div class="panel panel-default">
+	 <div class="panel-heading">
+	 	Submitted Questions:
+	 </div>
+   </div>
+</div>
+<%= erb :"users/questions", layout:false %>
+<div class="col-sm-5"> 
+  <div class="panel panel-default">
+	 <div class="panel-heading">
+	 	Submitted Answers:
+	 </div>
+   </div>
+</div>
+<%= erb :"users/answers", layout:false %>

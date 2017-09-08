@@ -9,6 +9,7 @@ class CreateUsers < ActiveRecord::Migration[5.0]
 		end 
 
 		create_table:questions do |t|
+			t.belongs_to :user
 			t.string :question
 			t.integer :user_id
 
@@ -16,6 +17,8 @@ class CreateUsers < ActiveRecord::Migration[5.0]
 		end
 
 		create_table:answers do |t|
+			t.belongs_to :user
+			t.belongs_to :question
 			t.string :answer
 			t.integer :question_id
 			t.integer :user_id

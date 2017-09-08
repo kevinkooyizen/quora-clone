@@ -93,3 +93,28 @@ body{
     margin-right: -2px;
     height: 34px;
 }
+
+/*signup_page*/
+#error_shown {
+    color: red;
+}
+
+/*all*/
+a {
+    color: black;
+}
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:active {
+    text-decoration: underline;
+}

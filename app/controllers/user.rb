@@ -46,8 +46,31 @@ get '/user_profile/:id' do
 	if logged_in?
 		id = params[:id]
 		@user = User.find(id)
+		@question = Question.all
+		@answer = Answer.all
 		erb :"users/profile"
 	else
 		redirect "/"
 	end
+end
+
+get '/users/:id/questions' do
+	@question = Question.all
+	@answer = Answer.all
+	@user = User.find(params[:id])
+	erb :"users/questions"
+end
+
+get '/users/:id/answers' do
+	@question = Question.all
+	@answer = Answer.all
+	@user = User.find(params[:id])
+	erb :"users/answers"
+end
+
+get '/users/:id' do
+	@user = User.find(params[:id])
+	@question = Question.all
+	@answer = Answer.all
+	erb :"users/profile"
 end

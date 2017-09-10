@@ -1,6 +1,6 @@
 class CreateUsers < ActiveRecord::Migration[5.0]
 	def change
-		create_table:users do |t|
+		create_table :users do |t|
 			t.string :fullname
 			t.string :email
 			t.string :password_digest
@@ -8,7 +8,7 @@ class CreateUsers < ActiveRecord::Migration[5.0]
 			t.timestamps
 		end 
 
-		create_table:questions do |t|
+		create_table :questions do |t|
 			t.belongs_to :user
 			t.string :question
 			t.integer :user_id
@@ -16,7 +16,7 @@ class CreateUsers < ActiveRecord::Migration[5.0]
 			t.timestamps
 		end
 
-		create_table:answers do |t|
+		create_table :answers do |t|
 			t.belongs_to :user
 			t.belongs_to :question
 			t.string :answer
@@ -26,7 +26,7 @@ class CreateUsers < ActiveRecord::Migration[5.0]
 			t.timestamps
 		end
 
-		create_table:votes do |t|
+		create_table :votes do |t|
 			t.integer :user_id
 			t.integer :foreign_id
 			t.string :type

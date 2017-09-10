@@ -3,8 +3,14 @@
 	  <div class="panel panel-default">
 		 <div class="panel-heading question_heading">
 		    <div class="input-group-btn voting_box">
-		    <% byebug %>
-			<%= erb :"votes/votes", layout:false %>
+		    <div class="input-group-btn voting_box">
+		    	<form action = "/up_vote" method = "post">
+		    	<input type ="hidden" name = "question_id" value = "<%=u.id%>">
+					<button type = "submit" class="vote_buttons btn btn-default first_button"><img src = "/img/upvote.png" class = "vote_buttons"/></button>
+		    	</form>
+				<h6 id = "vote_count"><%= @question_vote.where(question_id:1, upvote: true).count %></h6>
+				<button type = "submit" formaction="/down_vote" formmethod = "post" class="vote_buttons btn btn-default second_button"><img src = "/img/downvote.png" class = "vote_buttons"/></button>
+			</div>
 		    </div>
 			  <div id = "question_box">
 		 		<h4 id = "question_in_heading_panel">Question: <a href = "/questions/<%= u.id %>"><%= u.question %></a></h4>

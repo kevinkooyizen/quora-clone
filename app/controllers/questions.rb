@@ -6,7 +6,6 @@ post '/post_question' do
 			return {success: true, input: params[:question_input], user_id: session[:id]}.to_json
 		end
 	else
-		redirect "/signup_page"
 		return {success: false, data_url: "/signup_page"}.to_json
 	end
 end
@@ -16,6 +15,7 @@ get '/questions/:id' do
 		@votes = Vote.all
 		@question = Question.all
 		@answer = Answer.all
+		@question_vote = QuestionVote.all
 		erb :"questions/all_questions"
 	else
 		@answer = Answer.all

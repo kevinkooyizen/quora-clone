@@ -3,7 +3,11 @@
   	<% if u.user_id == @user.id %>
 	  <div class="panel panel-default">
 	 	<div class="panel-heading question_heading">
-			<%= erb :"votes/votes", layout:false %>
+			<div class="input-group-btn voting_box">
+				<button formaction="/up_vote" class="vote_buttons btn btn-default first_button"><img src = "/img/upvote.png" class = "vote_buttons"/></button>
+				<h6 id = "vote_count">000</h6>
+				<button formaction="/down_vote" class="vote_buttons btn btn-default second_button"><img src = "/img/downvote.png" class = "vote_buttons"/></button>
+			</div>
 		    <div id = "question_box">
 	 			<h4 id = "question_in_heading_panel">Question: <a href = "/questions/<%= u.id %>"><%= u.question %></a></h4>
 	 	  	</div>

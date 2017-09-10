@@ -2,11 +2,10 @@
   <% @question.order("id ASC").each do |u|%>
 	  <div class="panel panel-default">
 		 <div class="panel-heading question_heading">
-			  <div class="input-group-btn voting_box">
-			  		<button formaction="/up_vote" class="vote_buttons btn btn-default first_button"><img src = "/img/upvote.png" class = "vote_buttons"/></button>
-				<h6 id = "vote_count">000</h6>
-					<button formaction="/down_vote" class="vote_buttons btn btn-default second_button"><img src = "/img/downvote.png" class = "vote_buttons"/></button>
-			  </div>
+		    <div class="input-group-btn voting_box">
+		    <% byebug %>
+			<%= erb :"votes/votes", layout:false %>
+		    </div>
 			  <div id = "question_box">
 		 		<h4 id = "question_in_heading_panel">Question: <a href = "/questions/<%= u.id %>"><%= u.question %></a></h4>
 		 	  </div>
@@ -17,11 +16,7 @@
 			<div id = "answer_box">
 			<% @answer.each do |i|%>
 				<% if i.question_id == u.id %>
-					<div class="input-group-btn voting_box">
-				  		<button formaction="/up_vote" class="vote_buttons btn btn-default first_button"><img src = "/img/upvote.png" class = "vote_buttons"/></button>
-					<h6 id = "vote_count">000</h6>
-						<button formaction="/down_vote" class="vote_buttons btn btn-default second_button"><img src = "/img/downvote.png" class = "vote_buttons"/></button>
-				  	</div>
+					<%= erb :"votes/votes", layout:false %>
 					<div class = "question_contents_main_panel" id = "answer">Answer: <%= i.answer %></div>
 					<div class = "question_contents_main_panel" id = "answer-user">
 						User: 

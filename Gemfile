@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 # Ruby Version
 ruby "2.4.0"
-
+gem 'byebug'
 # Adding Sinatra Drivers
 gem 'sinatra'
 gem 'sinatra-contrib'

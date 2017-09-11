@@ -72,5 +72,7 @@ get '/users/:id' do
 	@user = User.find(params[:id])
 	@question = Question.all
 	@answer = Answer.all
+	@question_vote = QuestionVote.all
+	@answer_vote = AnswerVote.all
 	erb :"users/profile"
 end

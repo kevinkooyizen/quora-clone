@@ -45,6 +45,52 @@ $(document).ready(function(){
 		});
 	});
 
+	vote = $('.voting');
+	vote.on('submit', function(voteSubmissionEvent){
+		voteSubmissionEvent.preventDefault();
+		console.log("Prevented default action!");
+
+		$('body').prepend('<img src="/img/spinner.gif" id="spinner" />');
+
+		$.ajax({
+			url: vote.attr('action'), // same as putting "urls"
+			method: vote.attr('method'),
+			data: vote.serialize(),
+			dataType: 'JSON',
+			success: function(response) {
+				$('#spinner').hide();
+				console.log(response);
+				debugger;
+
+				if (response.success) {
+					$('.well').after('\
+					  <div class="panel panel-default">\
+						 <div class="panel-heading"><h4>' + response.input + '</h4></div>\
+						  <div class="panel-body">\
+						  <hr>\
+							<vote>\
+							<div class="input-group">\
+							  <div class="input-group-btn">\
+							  <button class="btn btn-default">Up</button><button class="btn btn-default" id="second_button">Down</button>\
+							  </div>\
+							  <input class="vote-control" placeholder="Add a comment.." type="text">\
+							</div>\
+							</vote>\
+							\
+						  </div>\
+					   </div>\
+					');
+				}
+				else {
+					window.location.href = response.data_url
+				}
+			},
+			error: function(response){
+				debugger;
+			}
+		});
+	});
+
 	var answer = $('#answer_front_page');
 	// answer.on('submit', function(answerSubmissionEvent){
 	// 	answerSubmissionEvent.preventDefault();
@@ -79,6 +125,8 @@ $(document).ready(function(){
 	// 		}
 	// 	});
 	// });
+
+
 
 	// form.on("paste", function(formSubmissionEvent){
 	// 	var pastedData = formSubmissionEvent.originalEvent.clipboardData.getData('text');

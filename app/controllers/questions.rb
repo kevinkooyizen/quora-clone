@@ -16,10 +16,13 @@ get '/questions/:id' do
 		@question = Question.all
 		@answer = Answer.all
 		@question_vote = QuestionVote.all
+		@answer_vote = AnswerVote.all
 		erb :"questions/all_questions"
 	else
 		@answer = Answer.all
 		@question = Question.find(params[:id])
+		@question_vote = QuestionVote.all
+		@answer_vote = AnswerVote.all
 		erb :"questions/question"
 	end
 end

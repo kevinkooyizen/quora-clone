@@ -1,4 +1,56 @@
 <div class="col-sm-5">
+<!-- Trigger the modal with a button -->
+<!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Please sign in</h4>
+      </div>
+      <div class="modal-body">
+	      <div class="col-md-12">
+										<!-- Login via
+										<div class="social-buttons">
+											<a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
+											<a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
+										</div>
+		                                or -->
+										 <form class="form" role="form" method="get" action="/login" accept-charset="UTF-8" id="login-nav">
+												<div class="form-group">
+													 <label class="sr-only" for="exampleInputEmail2">Email address</label>
+													 <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" name="user[email]" required>
+												</div>
+												<div class="form-group">
+													 <label class="sr-only" for="exampleInputPassword2">Password</label>
+													 <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" name="user[password]" required>
+		                                             <!-- <div class="help-block text-right"><a href="">Forgot your password ?</a></div> -->
+												</div>
+												<div class="form-group">
+													 <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+												</div>
+												<div class="checkbox">
+													 <label>
+													 <input type="checkbox"> keep me logged-in
+													 </label>
+												</div>
+										 </form>
+									</div>
+									<div class="bottom text-center">
+										New here ? <a href="/signup_page"><b>Sign up here!</b></a>
+									</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
   <% @question.order("id ASC").each do |u|%>
 	  <div class="panel panel-default">
 		 <div class="panel-heading question_heading">
@@ -8,13 +60,19 @@
 					<button type = "submit" class="vote_buttons btn btn-default first_button"><img src = "/img/upvote.png" class = "vote_buttons"/></button>
 		    	</form>
 				<h6 id = "vote_count"><%= @question_vote.where(question_id: u.id, upvote: true).count - @question_vote.where(question_id:u.id, downvote: true).count%></h6>
-				<form action = "/down_vote_question" method = "post">
+				<form action = "/down_vote_question" method = "post" class = "voting_after">
 		    	<input type ="hidden" name = "question_id" value = "<%=u.id%>">
 					<button type = "submit" class="vote_buttons btn btn-default first_button"><img src = "/img/downvote.png" class = "vote_buttons"/></button>
 		    	</form>
 			</div>
 			  <div id = "question_box">
-		 		<h4 id = "question_in_heading_panel">Question: <a href = "/questions/<%= u.id %>"><%= u.question %></a></h4>
+		 		<h4 id = "question_in_heading_panel">Question: <a href = "/questions/<%= u.id %>">
+		 		<% if u.question.size > 50 %>
+			      	<%= u.question.slice(0..49) %><br/>
+			      	<a href="#" class="question-more" data-detail="<%=u.question%>">more..</a>
+		      	<% else %>
+		      		<%= u.question %> 
+	      		<% end %></a></h4>
 		 		User: 
 				<a href = "/users/<%= u.user_id %>">
 				<%= User.find_by(id: u.user_id).fullname %>
@@ -28,13 +86,13 @@
 				<% @answer.each do |i|%>
 					<% if i.question_id == u.id %>
 						<div class="input-group-btn voting_box">
-					    	<form action = "/up_vote_answer" method = "post">
-					    	<input type ="hidden" name = "answer_id" value = "<%=u.id%>">
+					    	<form action = "/up_vote_answer" method = "post" class = "voting">
+					    	<input type ="hidden" name = "answer_id" value = "<%=i.id%>">
 								<button type = "submit" class="vote_buttons btn btn-default first_button"><img src = "/img/upvote.png" class = "vote_buttons"/></button>
 					    	</form>
 							<h6 id = "vote_count"><%= @answer_vote.where(answer_id: i.id, upvote: true).count - @answer_vote.where(answer_id: i.id, downvote: true).count%></h6>
-							<form action = "/down_vote_answer" method = "post">
-					    	<input type ="hidden" name = "answer_id" value = "<%=u.id%>">
+							<form action = "/down_vote_answer" method = "post" class = "voting_after">
+					    	<input type ="hidden" name = "answer_id" value = "<%=i.id%>">
 								<button type = "submit" class="vote_buttons btn btn-default first_button"><img src = "/img/downvote.png" class = "vote_buttons"/></button>
 					    	</form>
 						</div>

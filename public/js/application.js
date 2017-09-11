@@ -1,3 +1,13 @@
+function expand(e){
+  e.preventDefault()
+  target = $(e.target)
+  target.parent().html(target.data('detail'))
+}
+
+$(document).ready(function() {
+	$('.question-more').click(expand);
+})
+
 $(document).ready(function(){
 	console.log("Ready")
 	// this ID here refers to the form where the user types in a URL
@@ -14,7 +24,7 @@ $(document).ready(function(){
 			data: form.serialize(),
 			dataType: 'JSON',
 			success: function(response) {
-				$('#spinner').hide();
+				$('#spinner').remove();
 				console.log(response);
 
 				if (response.success) {
@@ -37,7 +47,8 @@ $(document).ready(function(){
 					');
 				}
 				else {
-					window.location.href = response.data_url
+					$("#myModal").modal()
+					// window.location.href = response.data_url
 				}
 			},
 			error: function(response){
@@ -49,44 +60,56 @@ $(document).ready(function(){
 	vote.on('submit', function(voteSubmissionEvent){
 		voteSubmissionEvent.preventDefault();
 		console.log("Prevented default action!");
+		change_this = $(this).next()
 
-		$('body').prepend('<img src="/img/spinner.gif" id="spinner" />');
-
+		$('body').append('<img src="/img/spinner.gif" id="spinner" />');
 		$.ajax({
-			url: vote.attr('action'), // same as putting "urls"
+			url: $(this).attr('action'), // same as putting "urls"
 			method: vote.attr('method'),
 			data: vote.serialize(),
 			dataType: 'JSON',
 			success: function(response) {
-				$('#spinner').hide();
+				$('#spinner').remove();
 				console.log(response);
-				debugger;
 
 				if (response.success) {
-					$('.well').after('\
-					  <div class="panel panel-default">\
-						 <div class="panel-heading"><h4>' + response.input + '</h4></div>\
-						  <div class="panel-body">\
-						  <hr>\
-							<vote>\
-							<div class="input-group">\
-							  <div class="input-group-btn">\
-							  <button class="btn btn-default">Up</button><button class="btn btn-default" id="second_button">Down</button>\
-							  </div>\
-							  <input class="vote-control" placeholder="Add a comment.." type="text">\
-							</div>\
-							</vote>\
-							\
-						  </div>\
-					   </div>\
-					');
+					change_this.text(response.vote_count);
 				}
 				else {
-					window.location.href = response.data_url
+					$("#myModal").modal()
+					// window.location.href = response.data_url
 				}
 			},
 			error: function(response){
-				debugger;
+			}
+		});
+	});
+
+	vote_after = $('.voting_after');
+	vote_after.on('submit', function(vote_afterSubmissionEvent){
+		vote_afterSubmissionEvent.preventDefault();
+		console.log("Prevented default action!");
+		change_this = $(this).prev();
+
+		$('body').append('<img src="/img/spinner.gif" id="spinner" />');
+
+		$.ajax({
+			url: $(this).attr('action'), // same as putting "urls"
+			method: vote_after.attr('method'),
+			data: vote_after.serialize(),
+			dataType: 'JSON',
+			success: function(response) {
+				$('#spinner').remove();
+				console.log(response);
+				if (response.success) {
+					change_this.text(response.vote_count);
+				}
+				else {
+					$("#myModal").modal()
+					// window.location.href = response.data_url
+				}
+			},
+			error: function(response){
 			}
 		});
 	});

@@ -121,7 +121,6 @@ body{
 }
 
 .question_heading {
-    height:80px;
 }
 
 #question_box {
@@ -131,6 +130,7 @@ body{
 #question_in_heading_panel {
     margin-top: auto;
     margin-bottom: auto;
+    word-wrap: break-word;
 }
 
 .answer_box {

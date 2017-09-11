@@ -1,15 +1,15 @@
-<div class="col-sm-5"> 
+<div class="col-sm-5">
   <% @question.order("id ASC").each do |u|%>
   	<% if u.user_id == @user.id %>
 	  <div class="panel panel-default">
 	 	<div class="panel-heading question_heading">
 			<div class="input-group-btn voting_box">
-				<form action = "/up_vote_question" method = "post">
+				<form action = "/up_vote_question" method = "post" class = "voting">
 		    	<input type ="hidden" name = "question_id" value = "<%=u.id%>">
 					<button type = "submit" class="vote_buttons btn btn-default first_button"><img src = "/img/upvote.png" class = "vote_buttons"/></button>
 		    	</form>
-				<h6 id = "vote_count"><%= @question_vote.where(question_id:1, upvote: true).count - @question_vote.where(question_id:1, downvote: true).count%></h6>
-				<form action = "/down_vote_question" method = "post">
+				<h6 id = "vote_count"><%= @question_vote.where(question_id: u.id, upvote: true).count - @question_vote.where(question_id: u.id, downvote: true).count%></h6>
+				<form action = "/down_vote_question" method = "post" class = "voting_after">
 		    	<input type ="hidden" name = "question_id" value = "<%=u.id%>">
 					<button type = "submit" class="vote_buttons btn btn-default first_button"><img src = "/img/downvote.png" class = "vote_buttons"/></button>
 		    	</form>
@@ -29,13 +29,13 @@
 			<% @answer.each do |i|%>
 				<% if i.question_id == u.id %>
 					<div class="input-group-btn voting_box">
-				    	<form action = "/up_vote_answer" method = "post">
+				    	<form action = "/up_vote_answer" method = "post" class = "voting">
 				    	<input type ="hidden" name = "answer_id" value = "<%=i.id%>">
 							<button type = "submit" class="vote_buttons btn btn-default first_button"><img src = "/img/upvote.png" class = "vote_buttons"/></button>
 				    	</form>
 						<h6 id = "vote_count"><%= @answer_vote.where(answer_id: i.id, upvote: true).count - @answer_vote.where(answer_id: i.id, downvote: true).count%></h6>
-						<form action = "/down_vote_answer" method = "post">
-				    	<input type ="hidden" name = "answer_id" value = "<%=i.id%>">
+						<form action = "/down_vote_answer" method = "post" class = "voting_after">
+				    		<input type ="hidden" name = "answer_id" value = "<%=i.id%>">
 							<button type = "submit" class="vote_buttons btn btn-default first_button"><img src = "/img/downvote.png" class = "vote_buttons"/></button>
 				    	</form>
 					</div>

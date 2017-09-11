@@ -48,6 +48,8 @@ get '/user_profile/:id' do
 		@user = User.find(id)
 		@question = Question.all
 		@answer = Answer.all
+		@question_vote = QuestionVote.all
+		@answer_vote = AnswerVote.all	
 		erb :"users/profile"
 	else
 		redirect "/"
@@ -58,6 +60,8 @@ get '/users/:id/questions' do
 	@question = Question.all
 	@answer = Answer.all
 	@user = User.find(params[:id])
+	@question_vote = QuestionVote.all
+	@answer_vote = AnswerVote.all	
 	erb :"users/questions"
 end
 
@@ -65,6 +69,8 @@ get '/users/:id/answers' do
 	@question = Question.all
 	@answer = Answer.all
 	@user = User.find(params[:id])
+	@question_vote = QuestionVote.all
+	@answer_vote = AnswerVote.all
 	erb :"users/answers"
 end
 

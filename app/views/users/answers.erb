@@ -4,12 +4,12 @@
 		  	<div class="panel panel-default">
 			  	<div class="panel-heading question_heading">
 				  	<div class="input-group-btn voting_box">
-						<form action = "/up_vote_question" method = "post">
+						<form action = "/up_vote_question" method = "post" class = "voting">
 				    	<input type ="hidden" name = "question_id" value = "<%=i.question_id%>">
 							<button type = "submit" class="vote_buttons btn btn-default first_button"><img src = "/img/upvote.png" class = "vote_buttons"/></button>
 				    	</form>
 						<h6 id = "vote_count"><%= @question_vote.where(question_id:1, upvote: true).count - @question_vote.where(question_id:1, downvote: true).count%></h6>
-						<form action = "/down_vote_question" method = "post">
+						<form action = "/down_vote_question" method = "post" class = "voting_after_after">
 				    	<input type ="hidden" name = "question_id" value = "<%=i.question_id%>">
 							<button type = "submit" class="vote_buttons btn btn-default first_button"><img src = "/img/downvote.png" class = "vote_buttons"/></button>
 				    	</form>
@@ -29,12 +29,12 @@
 					<hr>
 					<div id = "answer_box">
 						<div class="input-group-btn voting_box">
-					    	<form action = "/up_vote_answer" method = "post">
+					    	<form action = "/up_vote_answer" method = "post" class = "voting">
 					    	<input type ="hidden" name = "answer_id" value = "<%=i.id%>">
 								<button type = "submit" class="vote_buttons btn btn-default first_button"><img src = "/img/upvote.png" class = "vote_buttons"/></button>
 					    	</form>
 							<h6 id = "vote_count"><%= @answer_vote.where(answer_id: i.id, upvote: true).count - @answer_vote.where(answer_id: i.id, downvote: true).count%></h6>
-							<form action = "/down_vote_answer" method = "post">
+							<form action = "/down_vote_answer" method = "post" class = "voting_after">
 					    	<input type ="hidden" name = "answer_id" value = "<%=i.id%>">
 								<button type = "submit" class="vote_buttons btn btn-default first_button"><img src = "/img/downvote.png" class = "vote_buttons"/></button>
 					    	</form>

@@ -1,3 +1,9 @@
+get '/questions' do
+	byebug
+	@questions = Question.paginate(page: params[:page])
+	erb :"questions/index"
+end
+
 post '/post_question' do
 	if logged_in?
 		question = Question.new(question: params[:question_input], user_id: session[:id])

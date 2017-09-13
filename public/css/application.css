@@ -121,6 +121,7 @@ body{
 }
 
 .question_heading {
+    min-height: 80px;
 }
 
 #question_box {
